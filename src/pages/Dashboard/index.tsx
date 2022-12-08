@@ -37,13 +37,24 @@ const Dashboard = () => {
   return (
     <>
       <PageTitle title="Dashboard" />
-      <Button
-        variant="contained"
-        sx={{ marginBottom: "2rem" }}
-        onClick={() => navigate("/create")}
-      >
-        Create new Joke
-      </Button>
+      <div style={{ display: "flex", justifyContent: "space-between" }}>
+        <Button
+          variant="contained"
+          sx={{ marginBottom: "2rem" }}
+          onClick={() => navigate("/create")}
+        >
+          Create new Joke
+        </Button>
+        <Button
+          sx={{ marginBottom: "2rem" }}
+          onClick={() => {
+            localStorage.removeItem("token");
+            window.location.reload();
+          }}
+        >
+          Sign-out
+        </Button>
+      </div>
       <DataGrid
         pageSize={limit}
         loading={isLoading}
