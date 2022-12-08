@@ -10,10 +10,16 @@ import Container from "@mui/material/Container";
 import MenuItem from "@mui/material/MenuItem";
 import AdbIcon from "@mui/icons-material/Adb";
 import { Link } from "react-router-dom";
+import { useTheme } from "@emotion/react";
+import { ColorModeContext } from "../../App";
+import Brightness4Icon from "@mui/icons-material/Brightness4";
+import Brightness7Icon from "@mui/icons-material/Brightness7";
 
 const pages = [{ title: "Dashboard", to: "/" }];
 
 function ResponsiveAppBar() {
+  const theme = useTheme();
+  const colorMode = React.useContext(ColorModeContext);
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
     null
   );
@@ -46,9 +52,15 @@ function ResponsiveAppBar() {
               textDecoration: "none",
             }}
           >
-            Logi
+            Jokes
           </Typography>
-
+          <IconButton
+            sx={{ ml: 1 }}
+            onClick={colorMode.toggleColorMode}
+            color="inherit"
+          >
+            {theme === "dark" ? <Brightness7Icon /> : <Brightness4Icon />}
+          </IconButton>
           <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
             <IconButton
               size="large"
@@ -113,7 +125,7 @@ function ResponsiveAppBar() {
               textDecoration: "none",
             }}
           >
-            Logi
+            Jokes
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
             {pages.map((page) => (
