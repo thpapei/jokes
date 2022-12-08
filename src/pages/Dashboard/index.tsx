@@ -1,6 +1,7 @@
-import { Alert, CircularProgress } from "@mui/material";
+import { Alert, Button, CircularProgress } from "@mui/material";
 import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import DataGrid from "../../components/Datagrid";
 import PageTitle from "../../components/PageTitle";
 import { GET_JOKES } from "../../constants/reactQueryKeys";
@@ -16,6 +17,7 @@ const Dashboard = () => {
     isLoading,
     isError,
   } = useQuery([GET_JOKES, page, limit], () => getJokesPaginated(page, limit));
+  const navigate = useNavigate();
 
   if (isError) {
     return (
@@ -35,6 +37,13 @@ const Dashboard = () => {
   return (
     <>
       <PageTitle title="Dashboard" />
+      <Button
+        variant="contained"
+        sx={{ marginBottom: "2rem" }}
+        onClick={() => navigate("/create")}
+      >
+        Create new Joke
+      </Button>
       <DataGrid
         pageSize={limit}
         loading={isLoading}

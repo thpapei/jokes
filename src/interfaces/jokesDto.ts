@@ -1,10 +1,10 @@
 export interface JokeDto {
-  id: string;
+  id?: string;
   Title: string;
   Body: string;
   Author: string;
-  Views: number;
-  CreatedAt: number;
+  Views?: number;
+  CreatedAt?: number;
 }
 
 export interface JokesDto {
