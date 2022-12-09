@@ -19,10 +19,21 @@ import { deleteJoke } from "../../network/services/deleteJoke";
 import { getJoke } from "../../network/services/getJoke";
 import updateJoke from "../../network/services/updateJoke";
 import dateFormatter from "../../util/dateFormatter";
+import DeleteButton from "../DeleteButton";
 import Link from "../Link";
 
 const JokeForm = () => {
   const { id } = useParams();
+
+  const [title, setTitle] = useState("");
+  const [isTitleTouched, setIsTitleTouched] = useState(false);
+  const [body, setBody] = useState("");
+  const [isBodyTouched, setIsBodyTouched] = useState(false);
+  const [author, setAuthor] = useState("");
+  const [isAuthorTouched, setIsAuthorTouched] = useState(false);
+  const [isSuccess, setIsSuccess] = useState(false);
+  const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false);
+
   const navigate = useNavigate();
 
   const {
@@ -57,21 +68,18 @@ const JokeForm = () => {
       },
     });
 
-  const [title, setTitle] = useState("");
-  const [isTitleTouched, setIsTitleTouched] = useState(false);
-  const [body, setBody] = useState("");
-  const [isBodyTouched, setIsBodyTouched] = useState(false);
-  const [author, setAuthor] = useState("");
-  const [isAuthorTouched, setIsAuthorTouched] = useState(false);
-  const [isSuccess, setIsSuccess] = useState(false);
-
   useEffect(() => {
+    // This sets the initial values
+    // in the joke form.
     setTitle(joke?.Title || "");
     setBody(joke?.Body || "");
     setAuthor(joke?.Author || "");
   }, [isFetched]);
 
   const handleSubmit = () => {
+    // If we have an id url, that means
+    // we're trying to update a joke.
+    // If not, the we should create a joke.
     if (id && !!joke?.id) {
       updateJokeMutation({
         id: joke.id,
@@ -97,6 +105,8 @@ const JokeForm = () => {
         id: joke?.id,
       });
     }
+
+    setIsDeleteDialogOpen(false);
   };
 
   if (!!id && isLoading) {
@@ -184,13 +194,13 @@ const JokeForm = () => {
             {!!id ? "Update" : "Create"}
           </Button>
           {!!id && (
-            <Button
-              style={{ color: "red" }}
+            <DeleteButton
+              open={isDeleteDialogOpen}
               disabled={!author || !title || !body}
-              onClick={handleDelete}
-            >
-              {"Delete"}
-            </Button>
+              onClick={() => setIsDeleteDialogOpen(true)}
+              handleDelete={handleDelete}
+              handleClose={() => setIsDeleteDialogOpen(false)}
+            />
           )}
         </div>
       </CardContent>
