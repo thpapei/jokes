@@ -1,6 +1,7 @@
 import { Card, CardContent } from "@mui/material";
 import { useState } from "react";
-import { ILayoutProps } from "../../interfaces/dashboard";
+import { ILayoutProps } from "../../interfaces/layoutProps";
+
 import ResponsiveAppBar from "../Appbar";
 import LoginPage from "../LoginPage";
 
