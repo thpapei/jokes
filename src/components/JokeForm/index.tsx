@@ -58,6 +58,8 @@ const JokeForm = () => {
       },
     });
 
+  const { mutate: increaseViewsMutation } = useMutation(updateJoke);
+
   const { mutate: deleteJokeMutation, isLoading: isDeleteLoading } =
     useMutation(deleteJoke, {
       onSuccess: () => {
@@ -75,6 +77,21 @@ const JokeForm = () => {
     setBody(joke?.Body || "");
     setAuthor(joke?.Author || "");
   }, [isFetched]);
+
+  useEffect(() => {
+    // This increases the views of the
+    // joke by 1.
+    if (joke) {
+      increaseViewsMutation({
+        id: joke.id,
+        Author: joke.Author,
+        Title: joke.Title,
+        Body: joke.Body,
+        Views: joke.Views ? joke.Views + 1 : 1,
+        CreatedAt: joke.CreatedAt,
+      });
+    }
+  }, [joke]);
 
   const handleSubmit = () => {
     // If we have an id url, that means
