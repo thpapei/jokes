@@ -12,13 +12,14 @@ import {
 } from "@mui/material";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { useEffect, useState } from "react";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { GET_JOKE } from "../../constants/reactQueryKeys";
 import createJoke from "../../network/services/createJoke";
 import { deleteJoke } from "../../network/services/deleteJoke";
 import { getJoke } from "../../network/services/getJoke";
 import updateJoke from "../../network/services/updateJoke";
 import dateFormatter from "../../util/dateFormatter";
+import Link from "../Link";
 
 const JokeForm = () => {
   const { id } = useParams();
