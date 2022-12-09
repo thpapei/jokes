@@ -95,6 +95,8 @@ const JokeForm = () => {
         Author: author,
         Title: title,
         Body: body,
+        CreatedAt: new Date().getTime(),
+        Views: 0,
       });
     }
   };
