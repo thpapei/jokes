@@ -1,7 +1,7 @@
 import { createBrowserRouter } from "react-router-dom";
-import JokeForm from "../components/JokeForm";
 import Layout from "../components/Layout";
 import Dashboard from "../pages/Dashboard";
+import JokePage from "../pages/JokePage";
 
 const router = createBrowserRouter(
   [
@@ -17,7 +17,7 @@ const router = createBrowserRouter(
       path: "/:id",
       element: (
         <Layout>
-          <JokeForm />
+          <JokePage />
         </Layout>
       ),
     },
@@ -25,7 +25,7 @@ const router = createBrowserRouter(
       path: "/create",
       element: (
         <Layout>
-          <JokeForm />
+          <JokePage />
         </Layout>
       ),
     },
