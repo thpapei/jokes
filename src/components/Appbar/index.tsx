@@ -10,7 +10,7 @@ import Container from "@mui/material/Container";
 import MenuItem from "@mui/material/MenuItem";
 import AdbIcon from "@mui/icons-material/Adb";
 import { Link } from "react-router-dom";
-import { useTheme } from "@emotion/react";
+import { useTheme } from "@mui/material/styles";
 import { ColorModeContext } from "../../App";
 import Brightness4Icon from "@mui/icons-material/Brightness4";
 import Brightness7Icon from "@mui/icons-material/Brightness7";
@@ -59,7 +59,11 @@ function ResponsiveAppBar() {
             onClick={colorMode.toggleColorMode}
             color="inherit"
           >
-            {theme === "dark" ? <Brightness7Icon /> : <Brightness4Icon />}
+            {theme.palette.mode === "dark" ? (
+              <Brightness7Icon />
+            ) : (
+              <Brightness4Icon />
+            )}
           </IconButton>
           <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
             <IconButton
