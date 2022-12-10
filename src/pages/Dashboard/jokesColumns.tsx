@@ -22,16 +22,16 @@ const jokesColumns: GridColDef[] = [
     valueFormatter: authorFormatter,
   },
   {
+    field: "CreatedAt",
+    headerName: "Created Date",
+    flex: 1,
+    valueFormatter: dateFormatter,
+  },
+  {
     field: "Views",
     headerName: "Views",
     flex: 1,
     renderCell: (params) => <ViewsComponent views={params.value} />,
-  },
-  {
-    field: "CreatedAt",
-    headerName: "CreatedAt",
-    flex: 1,
-    valueFormatter: dateFormatter,
   },
 ];
 
